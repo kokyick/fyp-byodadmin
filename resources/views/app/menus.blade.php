@@ -349,8 +349,14 @@
 								<hr/>
 								<p></p>
 								<button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
-								<p></p><a><i>Delete this item</i></a>
+								
 							</div>
+					</form>
+					<form action="{{ route('dodeletedish')}}" method="POST">
+						{{ csrf_field() }}
+						<input style="display: none;" id="outletid" type="text" name="outletid" class="form-control input-number">
+						<input style="display: none;" id="dish_id" type="text" name="dish_id" class="form-control input-number">
+						<button type="submit" style="margin:5px;" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
 					</form>
 				</div>
 			</div> 
@@ -441,6 +447,7 @@ $('.myBtn').click(function(){
 		$(".modal-tit").html(title);
 		$("#modal_image").attr("src",data.product_image);
 		$('#itemid').attr('value', data.merchant_product_id);
+		$('#dish_id').attr('value', data.merchant_product_id);
 		$('#itemname').attr('value', data.name);
 		$('#itemprice').attr('value', data.price);
 		$('#itemproduct_image').attr('value', data.product_image);

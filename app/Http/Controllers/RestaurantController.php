@@ -33,6 +33,7 @@ class RestaurantController extends Controller
 	//Return
     return view("app.menus", compact('MenuList','FoodTypeList','DishList'));
   }
+  //individual outlet
   public function viewmenus($id)
   {
 	//Menus
@@ -45,11 +46,12 @@ class RestaurantController extends Controller
 	$OutList =Api::getRequest("Outlets/" . $id);
 	$OutData = json_decode( $OutList, true );
 	//Dish List
-	$PList =Api::getRequest("MerchantProducts");
+	$PList =Api::getRequest("MerchantProducts?merchant_id=" . 3);
 	$DishList = json_decode( $PList, true );
 	//Return
     return view("app.menu", compact('MenuList','FoodTypeList','OutData','DishList'));
   }
+
   public function viewfooditem($id)
   {
 	//Single Menus
@@ -79,7 +81,7 @@ class RestaurantController extends Controller
 	//get foreign keys
 	$Food =Api::getRequest("MerchantProducts/" . $itemid);
 	$FoodArray=json_decode($Food, true);
-	//body
+	//bodymenus
 	$myBody['merchant_product_id'] = $itemid;
 	$myBody['merchant_id'] = $FoodArray['merchant_id'];
 	$myBody['food_type'] = $FoodArray['food_type'];
@@ -102,6 +104,29 @@ class RestaurantController extends Controller
 	$myBody['merchant_product_id'] = $itemid;
 	//dd($myBody);
 	$result =Api::postRequest("Products/",$myBody);
+    return redirect()->route('menus', ['id'=>$outId]);
+  }
+  //soft delete dishes
+  public function deletedish(Request $request)
+  {
+  
+	$outId=$request->outletid;
+	$itemid=$request->dish_id;
+	$myBody=[];
+	//Soft delete dishes
+	$DelDish =Api::postRequest("SoftDeleteMerchantProduct?id=" . $itemid, $myBody);
+	return redirect()->route('menus', ['id'=>$outId]);
+  }
+  // delete outlet dishes
+  public function outletdishdel(Request $request)
+  {
+	$myBody['outlet_product_id'] = $request->outlet_product_id;
+	$myBody['merchant_product_id'] = $request->merchant_product_id;
+	$myBody['outlet_id'] = $request->outlet_idd;
+	//Soft delete dishes
+	$DelDish =Api::postRequest("DeleteOutletProduct", $myBody);
+	
+	$outId=$request->outlet_idd;
     return redirect()->route('menus', ['id'=>$outId]);
   }
   public function addmenu(Request $request)

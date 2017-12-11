@@ -35,12 +35,14 @@ Route::get('/viewsinglerestaurant/{id}', 'RestaurantController@viewsinglerestaur
 
 Route::get('/getrestaurant', 'RestaurantController@getrestaurant')->name('getrestaurant');
 Route::post('/dooutletedit/', 'RestaurantController@outletedit')->name('dooutletedit');
+Route::post('/dodeleteoutdish/', 'RestaurantController@outletdishdel')->name('dodeleteoutdish');
 
 
 Route::post('/addcart/', 'CartController@AddCart')->name('addcart');
 Route::post('/domenuedit/', 'RestaurantController@editmenu')->name('domenuedit');
 Route::post('/domenuadd/', 'RestaurantController@addmenu')->name('domenuadd');
 Route::post('/dodishadd/', 'RestaurantController@adddish')->name('dodishadd');
+Route::post('/dodeletedish/', 'RestaurantController@deletedish')->name('dodeletedish');
 
 
 Route::post('/dologin/', 'AccountController@login')->name('dologin');

@@ -165,7 +165,7 @@
 						</div>
 					</div>
 				  @foreach ($MenuList as $Menu)
-						<div class="element transition {{ $Menu['food_type_id'] }} myBtn" id="{{ route('singlemenus', $Menu['merchant_product_id']) }}" data-category="transition">
+						<div class="element transition {{ $Menu['food_type_id'] }} myBtn" name="{{ $OutData['outlet_id'] }}" id="{{ route('singlemenus', $Menu['merchant_product_id']) }}" data-category="transition">
 							<div class="card">
 								<div class="card-content">
                     				<a href="#" class="thumb"><figure class="img-polaroid"><img class="img-thumb" src="{{ $Menu['product_image'] }}" alt=""></figure></a><span class="description">{{ $Menu['name'] }}</span>
@@ -451,8 +451,14 @@
 								<hr/>
 								<p></p>
 								<button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
-								<p></p><a><i>Delete this item</i></a>
 							</div>
+					</form>
+					<form action="{{ route('dodeleteoutdish')}}" method="POST">
+						{{ csrf_field() }}
+						<input style="display: none;" id="outlet_product_id" type="text" name="outlet_product_id" class="form-control input-number">
+						<input style="display: none;" id="merchant_product_id" type="text" name="merchant_product_id" class="form-control input-number">
+						<input style="display: none;" id="outlet_idd" type="text" name="outlet_idd" class="form-control input-number">
+						<button type="submit" style="margin:5px;" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
 					</form>
 				</div>
 			</div> 
@@ -477,6 +483,7 @@ var span = document.getElementsByClassName("close")[0];
 // When the user clicks the button, open the modal 
 $('.myBtn').click(function(){
 	var food = $(this).attr('id');
+	var outletiid=$(this).attr('name');
 	$.get(food,function(data){
 		var header="<h3>" + data.name + "</h3>";
 		var body="$ "+data.price+"<br/> ";
@@ -489,6 +496,11 @@ $('.myBtn').click(function(){
 		$(".modal-tit").html(title);
 		$("#modal_image").attr("src",data.product_image);
 		$('#itemid').attr('value', data.merchant_product_id);
+		
+		$('#outlet_product_id').attr('value', data.outlet_product_id);
+		$('#merchant_product_id').attr('value', data.merchant_product_id);
+		$('#outlet_idd').attr('value', outletiid);
+		
 		$('#itemname').attr('value', data.name);
 		$('#itemprice').attr('value', data.price);
 		$('#itemproduct_image').attr('value', data.product_image);

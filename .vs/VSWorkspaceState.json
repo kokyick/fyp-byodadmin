@@ -6,11 +6,11 @@
     "\\app\\Http\\Controllers",
     "\\app\\Library",
     "\\public",
-    "\\public\\css",
     "\\resources",
     "\\resources\\views",
-    "\\resources\\views\\app"
+    "\\resources\\views\\layouts",
+    "\\routes"
   ],
-  "SelectedNode": "\\resources\\views\\app\\cart.blade.php",
+  "SelectedNode": "\\app\\Http\\Controllers\\RestaurantController.php",
   "PreviewInSolutionExplorer": false
 }
