@@ -8,9 +8,9 @@
     "\\public",
     "\\resources",
     "\\resources\\views",
-    "\\resources\\views\\layouts",
-    "\\routes"
+    "\\resources\\views\\app",
+    "\\resources\\views\\layouts"
   ],
-  "SelectedNode": "\\app\\Http\\Controllers\\RestaurantController.php",
+  "SelectedNode": "\\resources\\views\\app\\menu.blade.php",
   "PreviewInSolutionExplorer": false
 }

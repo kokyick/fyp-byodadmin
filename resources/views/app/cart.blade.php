@@ -187,6 +187,8 @@
 
 </div>
 
+
+
 <script>
 //number
 //plugin bootstrap minus and plus
@@ -290,4 +292,6 @@ window.onclick = function(event) {
     }
 }
 </script>
+//
+
 @endsection
