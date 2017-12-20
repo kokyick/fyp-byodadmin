@@ -97,13 +97,12 @@ class RestaurantController extends Controller
   {
 	//Save edits
 	$outId=$request->outlet_id;
-	$itemid=$request->aitemfood_type;
-
-	//body
-	$myBody['outlet_id'] = $outId;
-	$myBody['merchant_product_id'] = $itemid;
-	//dd($myBody);
-	$result =Api::postRequest("Products/",$myBody);
+	$dishlistt=$request->dish_list;
+	foreach ($dishlistt as $dish) {
+		$myBody['outlet_id'] = $outId;
+		$myBody['merchant_product_id'] = (int)$dish;
+		$result =Api::postRequest("Products/",$myBody);
+	}
     return redirect()->route('menus', ['id'=>$outId]);
   }
   //soft delete dishes
@@ -191,5 +190,10 @@ class RestaurantController extends Controller
 	$myBody['merchant_id'] = $OutletArray['merchant_id'];
 	$result =Api::putRequest("Outlets/" . $itemid,$myBody);
     return redirect()->route('menus', ['id'=>$itemid]);
+  }
+  public function doalldishadd(Request $request)
+  {
+  		$dishes=$request->dishes;
+  		dd($dishes);
   }
 }

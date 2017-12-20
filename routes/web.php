@@ -44,6 +44,8 @@ Route::post('/domenuadd/', 'RestaurantController@addmenu')->name('domenuadd');
 Route::post('/dodishadd/', 'RestaurantController@adddish')->name('dodishadd');
 Route::post('/dodeletedish/', 'RestaurantController@deletedish')->name('dodeletedish');
 
+Route::post('/doalldishadd/', 'RestaurantController@doalldishadd')->name('doalldishadd');
+
 
 Route::post('/dologin/', 'AccountController@login')->name('dologin');
 Route::post('/doregister/', 'AccountController@register')->name('doregister');

@@ -615,11 +615,11 @@ window.onclick = function(event) {
 						{{ csrf_field() }}
 							<div class="input-group" style="width:100%;">
 								<h3>Select dish</h3>
-								<select id="aitemfood_type" name="aitemfood_type"  class="form-control">
-									@foreach ($DishList as $Dish)
-										<option value="{{ $Dish['merchant_product_id'] }}">{{ $Dish['name'] }}</option>
-									@endforeach
-								</select>
+                                @foreach ($DishList as $Dish)
+                                <div class="checkbox">
+                                  <label><input type="checkbox" name="dish_list[]" value="{{ $Dish['merchant_product_id'] }}">{{ $Dish['name'] }}</label>
+                                </div>
+                                @endforeach
 								<input style="display: none;" id="outlet_id" type="text" name="outlet_id" value="{{$OutData['outlet_id']}}" class="form-control input-number">
 								<hr/>
 								<p></p>
