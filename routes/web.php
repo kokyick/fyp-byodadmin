@@ -21,7 +21,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/viewindex', 'HomeController@viewindex')->name('viewindex');
 Route::get('/viewindex1', 'HomeController@viewindex1')->name('viewindex1');
-Route::get('/viewcart', 'HomeController@viewcart')->name('viewcart');
+Route::get('/viewpayment', 'HomeController@viewpayment')->name('viewpayment');
 Route::get('/viewfeedback', 'HomeController@viewfeedback')->name('viewfeedback');
 Route::get('/viewterms', 'HomeController@viewterms')->name('viewterms');
 Route::get('/registration', 'HomeController@viewregistration')->name('registration');

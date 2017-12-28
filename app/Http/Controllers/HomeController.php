@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Library\Api;
+
 use Session;
 
 class HomeController extends Controller
@@ -38,20 +40,12 @@ class HomeController extends Controller
     {
         return view("app.index-1");
     }
-	public function viewcart()
+	public function viewpayment()
     {
-		$subtotal=0;
-		if(Session::has('cart')){
-			foreach (Session::get('cart') as $food){
-				$subtotal+=floatval($food['itemprice'])*floatval($food['quantity']);
-			}
-			Session::put('subtotal', $subtotal); 
-		}
-		if(!(Session::has('subtotal'))){
-			Session::put('subtotal', $subtotal);
-		}
-		
-        return view("app.cart");
+        //Menus
+        $OList =Api::getRequest("GetOutletOrders?outletID=" . 13);
+        $OrderList = json_decode( $OList, true );
+        return view("app.payment", compact('OrderList'));
     }
 	public function viewfeedback()
     {

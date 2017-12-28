@@ -51,7 +51,7 @@
 				  @if((Session::has('token')))
 					  <li><a href="{{ route('viewmenus') }}">Menu</a></li>
 					  <li><a href="{{ route('getrestaurant') }}">Restaurant</a></li>
-					  <li><a href="{{ route('viewcart') }}">Payments</a></li>
+					  <li><a href="{{ route('viewpayment') }}">Payments</a></li>
 				  @endif
 				  <li><a href="{{ route('login') }}">Account</a>
 				      <ul>
