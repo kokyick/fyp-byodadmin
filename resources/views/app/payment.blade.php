@@ -10,7 +10,7 @@
             <div class="row">
                 <h2 class="pad_bot2">Transactions History</h2>
                 <div class="table-responsive">          
-          <table class="table table-striped">
+          <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-toggle="table" data-url="data1.json" class="table table-striped">
             <thead>
               <tr>
                 <th>#</th>
