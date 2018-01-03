@@ -55,5 +55,12 @@ class CartController extends Controller
 
     return redirect()->route('menus', ['id'=>$outId]);
   }
+  public function vieworderhist()
+  {
+	$Orders =Api::getRequest("GetOutletOrders?outletID=" . 13);
+	$OrdersItem = json_decode( $Orders, true );
+	//dd($OrdersItem);
+	return $OrdersItem;
+  }
 
 }

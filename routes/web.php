@@ -39,6 +39,9 @@ Route::post('/dodeleteoutdish/', 'RestaurantController@outletdishdel')->name('do
 
 
 Route::post('/addcart/', 'CartController@AddCart')->name('addcart');
+Route::get('/vieworderhist/', 'CartController@vieworderhist')->name('vieworderhist');
+
+
 Route::post('/domenuedit/', 'RestaurantController@editmenu')->name('domenuedit');
 Route::post('/domenuadd/', 'RestaurantController@addmenu')->name('domenuadd');
 Route::post('/dodishadd/', 'RestaurantController@adddish')->name('dodishadd');

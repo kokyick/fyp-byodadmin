@@ -1,9 +1,17 @@
 ﻿@extends('layouts.master')
 
 @section('content')
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <!--==============================content=================================-->
 <div id="content">
+    <div class="row_7">
+        <div class="container">
+            <div class="row">
+                <h2 class="pad_bot2">Revenue</h2>
+                <canvas id="myChart"></canvas>
+            </div>
+        </div>
+    </div>
     <!--==============================row7=================================-->
     <div class="row_7">
         <div class="container">
@@ -18,11 +26,12 @@
                 <th>Time</th>
                 <th>Outlet Name</th>
                 <th>Bill</th>
+                <th>Paid</th>
               </tr>
             </thead>
             <tbody>
               @foreach ($OrderList as $food)
-              <tr>
+              <tr class="vieworders">
                 <td>
                     {{ $food['order_id'] }}
                 </td>
@@ -41,6 +50,13 @@
                 </td>
                 <td>
                     {{ $food['order_bill'] }} RM
+                </td>
+                <td>
+                    @if($food['order_payment']==1)
+                       <i style="color: #81C784;" class="fa fa-circle" aria-hidden="true"></i> Paid
+                    @else
+                       <i style="color: #FDD835;" class="fa fa-circle" aria-hidden="true"></i> Processing
+                    @endif
                 </td>
               </tr>
               @endforeach
@@ -181,6 +197,11 @@
 
 
 <script>
+
+$("div.table-responsive table tr").click(function(e){
+  // Holds the product ID of the clicked element
+  console.log("clicked here");
+});
 //number
 //plugin bootstrap minus and plus
 //http://jsfiddle.net/laelitenetwork/puJ6G/
@@ -261,15 +282,16 @@ $(".input-number").keydown(function (e) {
 var modal = document.getElementById('myModal');
 
 // Get the button that opens the modal
-var btn = document.getElementById("myBtn");
+// var btn = document.getElementById("myBtn");
 
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks the button, open the modal 
-btn.onclick = function() {
-    modal.style.display = "block";
-}
+
+// btn.onclick = function() {
+//     modal.style.display = "block";
+// }
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
@@ -282,6 +304,46 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
+var ctx = document.getElementById('myChart').getContext('2d');
+$.get("http://127.0.0.1:8000/vieworderhist",function(data){
+    console.log("data: " . data)
+    var timearr=[];
+    var pricearr=[];
+    for (i = 0; i < data.length; i++) {
+        console.log("order: "+data[i]);
+        var clashchecker=false;
+        for(x=0;x<timearr;x++){
+            //check if time exist
+            if(x==data[i]['order_time']){
+                pricearr[x]+=data[i]['order_bill'];
+                clashchecker=true;
+                break;
+            }
+
+        }
+        if(clashchecker==false){
+            timearr.push(data[i]['order_time']);
+            pricearr.push(data[i]['order_bill']);
+        }
+    }
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'line',
+        // The data for our dataset
+        data: {
+            labels: timearr,
+            datasets: [{
+                label: "",
+                backgroundColor: '#42A5F5',
+                borderColor: '#1565C0',
+                data: pricearr,
+            }]
+        },
+
+        // Configuration options go here
+        options: {}
+    });                                         
+});
 </script>
 //
 
