@@ -305,7 +305,7 @@ window.onclick = function(event) {
     }
 }
 var ctx = document.getElementById('myChart').getContext('2d');
-$.get("http://127.0.0.1:8000/vieworderhist",function(data){
+$.get("https://whaletress-admin.azurewebsites.net/vieworderhist",function(data){
     console.log("data: " . data)
     var timearr=[];
     var pricearr=[];
