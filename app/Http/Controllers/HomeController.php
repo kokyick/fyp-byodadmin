@@ -45,6 +45,7 @@ class HomeController extends Controller
         //Menus
         $OList =Api::getRequest("GetOutletOrders?outletID=" . 13);
         $OrderList = json_decode( $OList, true );
+        $OrderList=array_reverse($OrderList);
         return view("app.payment", compact('OrderList'));
     }
 	public function viewfeedback()
