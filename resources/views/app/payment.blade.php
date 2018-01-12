@@ -2,6 +2,12 @@
 
 @section('content')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<!-- Include Date Range Picker -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+
 <!--==============================content=================================-->
 <div id="content">
     <div class="row_7">
@@ -64,6 +70,17 @@
         </table>
         </div>
     </div>
+
+    <h2>Generate report</h2>
+    <form action="{{ route('htmltopdfview')}}" method="GET">
+        <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; padding: 4px; border-radius: 4px; width: 40%">
+            <i class="fa fa-calendar" aria-hidden="true"></i> &nbsp;
+            <span id="datespan"></span> <b class="caret"></b>
+        </div>
+        <input style="display: none;" type="text" name="reportstart" id="reportstart">
+        <input style="display: none;" type="text" name="reportend" id="reportend">
+        <button type="submit" style="margin-left: 0; margin-top: 10px;" class="btn btn-primary"><i class="fa fa-trash" aria-hidden="true"></i> Generte report</button>
+    </form>
 </div>
 </div>
 
@@ -197,6 +214,32 @@
 
 
 <script>
+$(function() {
+    var start = moment().subtract(29, 'days');
+    var end = moment();
+
+    function cb(start, end) {
+        $('#reportrange span').html(start.format('DD/MM/YYYY') + ' - ' + end.format('DD/MM/YYYY'));
+        $('#reportstart').val(start.format('DD/MM/YYYY'));
+        $('#reportend').val(end.format('DD/MM/YYYY'));
+    }
+
+    $('#reportrange').daterangepicker({
+        startDate: start,
+        endDate: end,
+        ranges: {
+           'Today': [moment(), moment()],
+           'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+           'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+           'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+           'This Month': [moment().startOf('month'), moment().endOf('month')],
+           'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        }
+    }, cb);
+
+    cb(start, end);
+    
+});
 
 $("div.table-responsive table tr").click(function(e){
   // Holds the product ID of the clicked element

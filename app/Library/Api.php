@@ -52,11 +52,9 @@ class Api
 		$client = new \GuzzleHttp\Client();
 		
 		$url = self::server . "api/" . $link;
-
 		//$myBody['name'] = "Demo";
 		try {
 		$request = $client->post($url,  ['form_params'=>$myBody]);
-
 		$response = $request->getBody()->getContents();
 		}
 		catch (RequestException $e) {
@@ -65,7 +63,7 @@ class Api
 				$response = Psr7\str($e->getResponse());
 			}
 		}
-
+		return ($response);
 	}
 	public static function putRequest($link, $myBody)
 	{

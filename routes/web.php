@@ -53,3 +53,5 @@ Route::post('/doalldishadd/', 'RestaurantController@doalldishadd')->name('doalld
 Route::post('/dologin/', 'AccountController@login')->name('dologin');
 Route::post('/doregister/', 'AccountController@register')->name('doregister');
 Route::get('/dologout/', 'AccountController@logout')->name('dologout');
+
+Route::get('/htmltopdfview/', 'ReportController@htmltopdfview')->name('htmltopdfview');
