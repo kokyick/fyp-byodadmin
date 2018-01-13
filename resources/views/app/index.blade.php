@@ -26,99 +26,14 @@
     <!--==============================row1=================================-->
     <div class="row_1">
         <div class="container">
-            <p class="title1">Someone is hungry!</p>
-            <p class="title2">Beciegast nveriti vitaesaert asety kertya aset aplica boserde nerafae kertyuraue styasnemo faserani  iasera khatrsasas ptaiadeser daesraeds. Casrolern atur aut oditaut. onsequuntur magni dolqui ratione voluptatemsequi nesciunt orasario jauystase joasuaserya vytarsa numquam eius modi teincidunt, ut labore et dolore magnam liaseras.</p>
-            <a href="#" class="btn btn-default btn-lg btn1">more</a>
+            <p class="title1">Welcome to Whaletress Admin Page!</p>
+            <p class="title2">In this web application, you will be able to manage your menus, payments as well as generating reports.</p>
+            <!-- <a href="#" class="btn btn-default btn-lg btn1">more</a> -->
         </div>
     </div>
-    <!--==============================row2=================================-->
-    <div class="row_2">
-        <div class="container">
-            <div class="row">
-                <ul class="list1">
-                    <li class="col-lg-4 col-md-4 col-sm-4 listbox1">
-                        <div class="box1">
-                            <a href="#">
-                                <figure><img src="{{ asset('img/page1_img1.jpg') }}" alt=""></figure>
-                                <p>Mains</p>
-                            </a>
-                        </div>
-                    </li>
-                    <li class="col-lg-4 col-md-4 col-sm-4 listbox2">
-                        <div class="box2">
-                            <a href="#">
-                                <p>Snacks</p>
-                                <figure><img src="img/page1_img2.jpg" alt=""></figure>
-                            </a>
-                        </div>
-                    </li>
-                    <li class="col-lg-4 col-md-4 col-sm-4 listbox3">
-                        <div class="box3">
-                            <a href="#">
-                                <figure><img src="img/page1_img3.jpg" alt=""></figure>
-                                <p>Drinks</p>
-                            </a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <!--==============================row3=================================-->
-    <div class="row_3">
-        <div class="container">
-            <div class="row">
-                <ul class="list3">
-                    <li class="col-lg-6 col-md-6 col-sm-6">
-                        <div class="box4">
-                            <figure><img src="img/page1_img4.jpg" alt=""></figure>
-                            <div class="info1 maxheight">
-                                <p class="list3title1">Best Restaurant</p>
-                                <p class="list3title2">Migytafsas deuauyt asares</p>
-                                <p class="list3title3">Kictaesaert asetyertya aset aplicibrdedas.</p>
-                                <a href="#" class="btn-link btn-link1">learn more<span></span></a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="col-lg-6 col-md-6 col-sm-6">
-                        <div class="box4">
-                            <figure><img src="img/page1_img5.jpg" alt=""></figure>
-                            <div class="info1 maxheight">
-                                <p class="list3title1">Top Area</p>
-                                <p class="list3title2">Btreasas lisemeyta siqades</p>
-                                <p class="list3title3">Kictaesaert asetyertya aset aplicibrdedas.</p>
-                                <a href="#" class="btn-link btn-link1">learn more<span></span></a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="col-lg-6 col-md-6 col-sm-6">
-                        <div class="box4">
-                            <figure><img src="img/page1_img6.jpg" alt=""></figure>
-                            <div class="info1 maxheight">
-                                <p class="list3title1">Top picks</p>
-                                <p class="list3title2">Dolore nuyfasa kerytertas</p>
-                                <p class="list3title3">Kictaesaert asetyertya aset aplicibrdedas.</p>
-                                <a href="#" class="btn-link btn-link1">learn more<span></span></a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="col-lg-6 col-md-6 col-sm-6">
-                        <div class="box4">
-                            <figure><img src="img/page1_img7.jpg" alt=""></figure>
-                            <div class="info1 maxheight">
-                                <p class="list3title1">Promotions</p>
-                                <p class="list3title2">Fertyuasa mietyas lteasas</p>
-                                <p class="list3title3">Kictaesaert asetyertya aset aplicibrdedas.</p>
-                                <a href="#" class="btn-link btn-link1">learn more<span></span></a>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
+
     <!--==============================row4=================================-->
-    <div class="row_4">
+<!--     <div class="row_4">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-4 chef row4_col">
@@ -151,6 +66,6 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
 @endsection
