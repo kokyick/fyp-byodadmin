@@ -40,6 +40,11 @@ Route::post('/dodeleteoutdish/', 'RestaurantController@outletdishdel')->name('do
 
 Route::post('/addcart/', 'CartController@AddCart')->name('addcart');
 Route::get('/vieworderhist/', 'CartController@vieworderhist')->name('vieworderhist');
+Route::get('/singleorder/{id}','CartController@singleorder')->name('singleorder');
+
+Route::post('/orderPaid/','CartController@orderPaid')->name('orderPaid');
+Route::post('/cancelOrder/','CartController@cancelOrder')->name('cancelOrder');
+Route::get('/removefood/{id}','CartController@removefood')->name('removefood');
 
 
 Route::post('/domenuedit/', 'RestaurantController@editmenu')->name('domenuedit');

@@ -33,6 +33,7 @@
                 <th>Outlet Name</th>
                 <th>Bill</th>
                 <th>Paid</th>
+                <th>Edit</th>
               </tr>
             </thead>
             <tbody>
@@ -63,6 +64,11 @@
                     @else
                        <i style="color: #FDD835;" class="fa fa-circle" aria-hidden="true"></i> Processing
                     @endif
+                </td>
+                <td>
+                    <div class="myBtn" id="{{ route('singleorder', $food['order_id']) }}">
+                        <a href="#"></a><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                    </div>
                 </td>
               </tr>
               @endforeach
@@ -103,7 +109,7 @@
 /* Modal Content */
 .modal-content {
     position: relative;
-	border-radius: 10px;
+    border-radius: 10px;
     background-color: #fefefe;
     margin: auto;
     padding: 0;
@@ -144,25 +150,25 @@
 
 .modal-header {
     padding: 2px 16px;
-	border-radius: 10px 10px 0px 0px;
-    background-color: #EF5350;
+    border-radius: 10px 10px 0px 0px;
+    background-color: #1565C0;
     color: white;
 }
 
 .modal-body {padding: 2px 16px;}
 
 .modal-footer {
-	border-radius: 10px;
+    border-radius: 10px;
     padding: 2px 16px;
-    background-color: #EF5350;
+    background-color: #1565C0;
     color: white;
 }
 .center{
-	width: 150px;
-	margin: 40px auto;
+    width: 150px;
+    margin: 40px auto;
 }
-</style>
 
+</style>
 <!-- The Modal -->
 <div id="myModal" class="modal">
 
@@ -170,39 +176,39 @@
   <div class="modal-content">
     <div class="modal-header">
       <span class="close">&times;</span>
-      <h2 style="color: #FFFFFF;">Fish</h2>
+      <div class="modal-tit">
+      
+      </div>
     </div>
     <div class="modal-body">
-        <div class="row privacy_page">
-            <div class="col-lg-4 col-md-4 col-sm-4">
-				<a href="#" class="thumb"><figure class="img-polaroid"><img src="img/food_img.jpg" alt=""></figure></a>
-			</div>   
-			<div class="col-lg-8 col-md-8 col-sm-8" style="text-align:center;">
-				<figure><img src="img/smalllogo1.png" alt=""></figure>
-				<hr/>
-				<h3>Fish</h3>
-				<hr/>
-				<p>This is a fish.</p>
-				 <div class="center">
-				    
-					<p>
-					  </p><div class="input-group">
-						  <span class="input-group-btn">
-							  <button type="button" class="btn btn-danger btn-number"  data-type="minus" data-field="quant[2]">
-								<span class="glyphicon glyphicon-minus"></span>
-							  </button>
-						  </span>
-						  <input type="text" name="quant[2]" class="form-control input-number" value="1" min="1" max="100">
-						  <span class="input-group-btn">
-							  <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[2]">
-								  <span class="glyphicon glyphicon-plus"></span>
-							  </button>
-						  </span>
-					  </div>
-					<p></p>
-					<h2 style="padding:0;"><i class="fa fa-trash" aria-hidden="true"></i></h2>
-					</div>
-			</div> 
+        <div class="row privacy_page"> 
+            <div style="text-align:center;">
+                <!-- <figure><img src="{{ asset('img/smalllogo1.png') }}" alt=""></figure>
+                <hr/> -->
+                <div class="modal-info">
+                        <div class="card" style="width: 30%;">
+                           <div class="card-content">
+                              <figure><img src="{{ asset('img/smalllogo1.png') }}" alt=""></figure>
+                              <hr/>
+                              <ul id="list2" class="list2">
+                             </ul>
+                             <hr/>
+                             <h3 id="order_bills"></h3>
+                             <hr/>
+                         </div>
+                     </div>
+                    <form action="{{ route('orderPaid')}}" method="POST">
+                        {{ csrf_field() }}
+                        <input style="display: none;" id="orderId" type="text" name="orderId" class="form-control input-number">
+                        <button type="submit" style="margin:5px;" class="btn btn-primary"><i class="fa fa-cash" aria-hidden="true"></i> Order Paid</button>
+                    </form>
+                    <form action="{{ route('cancelOrder')}}" method="POST">
+                        {{ csrf_field() }}
+                        <input style="display: none;" id="orderId" type="text" name="orderId" class="form-control input-number">
+                        <button type="submit" style="margin:5px;" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Cancel Order</button>
+                    </form>
+                </div>
+            </div> 
         </div> 
     </div>
     <div class="modal-footer">
@@ -324,17 +330,45 @@ $(".input-number").keydown(function (e) {
 // Get the modal
 var modal = document.getElementById('myModal');
 
-// Get the button that opens the modal
-// var btn = document.getElementById("myBtn");
-
+var uri="https://whaletress-admin.azurewebsites.net/";
+var testuri="http://127.0.0.1:8000/removefood/";
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks the button, open the modal 
+$('.myBtn').click(function(){
+    var food = $(this).attr('id');
+    console.log(food);
+    $.get(food,function(data){
+        var title = "<h2 style='color: #FFFFFF;'>Order #"+data[0][0].order_id+"</h2>"
+        $(".modal-tit").html(title);
+        var ul = document.getElementById("list2");
+        var dataArr=data[0];
+        for (i = 0; i < (data[0].length); i++) { 
+          var a = document.createElement("a");
+          var li = document.createElement("li");
+          a.textContent =data[0][i].name+" x "+data[0][i].quantity;
+          a.setAttribute('href', uri+"removefood/"+data[0][i].food_order_id);
+          a.setAttribute('onclick', "return confirm('This dish will be deleted. Are you sure?')");
+          li.appendChild(a);
+          // li.appendChild(document.createTextNode(data[0][i].name+" x "+data[0][i].quantity));
+          li.setAttribute("id", data[0][i].food_order_id); // added line
+          ul.appendChild(li);
+        }
+        $("#order_bills").html(data[0][0].order_bill + " RM");
+        $('#orderId').attr('value', data[0][0].order_id);
+        // $('#dish_id').attr('value', data.merchant_product_id);
+        // $('#itemname').attr('value', data.name);
+        // $('#itemprice').attr('value', data.price);
+        // $('#itemproduct_image').attr('value', data.product_image);
+        // $('#itemmerchant_id').attr('value', data.merchant_id);
+        // $('#food_type').attr('value', data.food_type);
+        // $('#avg_ratings').attr('value', data.avg_ratings);
+    });
+    
 
-// btn.onclick = function() {
-//     modal.style.display = "block";
-// }
+    modal.style.display = "block";
+});
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
@@ -348,7 +382,7 @@ window.onclick = function(event) {
     }
 }
 var ctx = document.getElementById('myChart').getContext('2d');
-$.get("https://whaletress-admin.azurewebsites.net/vieworderhist",function(data){
+$.get(uri+"vieworderhist",function(data){
     console.log("data: " . data)
     var timearr=[];
     var pricearr=[];

@@ -62,5 +62,29 @@ class CartController extends Controller
 	//dd($OrdersItem);
 	return $OrdersItem;
   }
-
+  public function removefood($id)
+  {
+	//Single Menus
+	$Outlet =Api::postRequest("RemoveOrderFood?foodOrderedID=" . $id,null);
+	return redirect()->route('viewpayment');
+  }
+    public function singleorder($id)
+  {
+	//Single Menus
+	$Outlet =Api::getRequest("Orders?orderid=" . $id);
+	$OutletItem = json_decode( $Outlet, true );
+	return $OutletItem;
+  }
+  public function cancelOrder(Request $request)
+  {
+	//Single Menus
+	$Outlet =Api::postRequest("CancelOrder?orderId=" . $request->orderId,null);
+    return redirect()->route('viewpayment');
+  }
+  public function orderPaid(Request $request)
+  {
+	//Single Menus
+	$Outlet =Api::postRequest("CashPaid?orderId=" . $request->orderId,null);
+    return redirect()->route('viewpayment');
+  }
 }
