@@ -186,7 +186,7 @@
                 <!-- <figure><img src="{{ asset('img/smalllogo1.png') }}" alt=""></figure>
                 <hr/> -->
                 <div class="modal-info">
-                        <div class="card" style="width: 30%;">
+                        <div class="card" style="width: 90%;">
                            <div class="card-content">
                               <figure><img src="{{ asset('img/smalllogo1.png') }}" alt=""></figure>
                               <hr/>
@@ -199,13 +199,30 @@
                      </div>
                     <form action="{{ route('orderPaid')}}" method="POST">
                         {{ csrf_field() }}
-                        <input style="display: none;" id="orderId" type="text" name="orderId" class="form-control input-number">
+                        <input style="display: none;" id="orderId" type="text" name="orderId" class="form-control">
                         <button type="submit" style="margin:5px;" class="btn btn-primary"><i class="fa fa-cash" aria-hidden="true"></i> Order Paid</button>
                     </form>
                     <form action="{{ route('cancelOrder')}}" method="POST">
                         {{ csrf_field() }}
-                        <input style="display: none;" id="orderId" type="text" name="orderId" class="form-control input-number">
+                        <input style="display: none;" id="order1Id" type="text" name="order1Id" class="form-control">
                         <button type="submit" style="margin:5px;" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Cancel Order</button>
+                    </form>
+                    <hr/>
+                    <h3>Add new food to order</h3>
+                    <hr/>
+                    <form action="{{ route('addfoodorder')}}" style="padding: 10px;" method="POST">
+                        {{ csrf_field() }}
+                        <select class="form-control" name="dishes" id="dishes">
+                          @foreach ($DishList as $Dish)
+                            <option value="{{ $Dish['outletproduct_id'] }}">{{ $Dish['name'] }}</option>
+                          @endforeach
+                        </select>
+                        <br/>
+                        <input style="display: none;" id="order2Id" type="text" name="order2Id" class="form-control">
+
+                        <input class="form-control" type="number" placeholder="Quantity" name="quan" id="quan">
+                        <button type="submit" style="margin:5px;" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Add Food</button>
+
                     </form>
                 </div>
             </div> 
@@ -357,6 +374,8 @@ $('.myBtn').click(function(){
         }
         $("#order_bills").html(data[0][0].order_bill + " RM");
         $('#orderId').attr('value', data[0][0].order_id);
+        $('#order1Id').attr('value', data[0][0].order_id);
+        $('#order2Id').attr('value', data[0][0].order_id);
         // $('#dish_id').attr('value', data.merchant_product_id);
         // $('#itemname').attr('value', data.name);
         // $('#itemprice').attr('value', data.price);

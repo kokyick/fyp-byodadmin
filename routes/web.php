@@ -36,6 +36,7 @@ Route::get('/viewsinglerestaurant/{id}', 'RestaurantController@viewsinglerestaur
 Route::get('/getrestaurant', 'RestaurantController@getrestaurant')->name('getrestaurant');
 Route::post('/dooutletedit/', 'RestaurantController@outletedit')->name('dooutletedit');
 Route::post('/dodeleteoutdish/', 'RestaurantController@outletdishdel')->name('dodeleteoutdish');
+Route::post('/outofstockdish/', 'RestaurantController@outofstockdish')->name('outofstockdish');
 
 
 Route::post('/addcart/', 'CartController@AddCart')->name('addcart');
@@ -44,6 +45,7 @@ Route::get('/singleorder/{id}','CartController@singleorder')->name('singleorder'
 
 Route::post('/orderPaid/','CartController@orderPaid')->name('orderPaid');
 Route::post('/cancelOrder/','CartController@cancelOrder')->name('cancelOrder');
+Route::post('/addfoodorder/','CartController@addfoodorder')->name('addfoodorder');
 Route::get('/removefood/{id}','CartController@removefood')->name('removefood');
 
 

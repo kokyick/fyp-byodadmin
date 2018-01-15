@@ -78,7 +78,7 @@ class CartController extends Controller
   public function cancelOrder(Request $request)
   {
 	//Single Menus
-	$Outlet =Api::postRequest("CancelOrder?orderId=" . $request->orderId,null);
+	$Outlet =Api::postRequest("CancelOrder?orderId=" . $request->order1Id,null);
     return redirect()->route('viewpayment');
   }
   public function orderPaid(Request $request)
@@ -86,5 +86,20 @@ class CartController extends Controller
 	//Single Menus
 	$Outlet =Api::postRequest("CashPaid?orderId=" . $request->orderId,null);
     return redirect()->route('viewpayment');
+  }
+  public function addfoodorder(Request $request)
+  {
+		//Save edits
+		$dishes=$request->dishes;
+		$quantity=$request->quan;
+		$orderId=$request->order2Id;
+
+		$addFood['outlet_product_id']=(int)$dishes;
+    	$addFood['order_id']=(int)$orderId;
+		$addFood['quantity']=(int)$quantity;
+		$addFood['comments']="";
+		$result =Api::postRequest("addFoodOrder",$addFood);
+
+	    return redirect()->route('viewpayment');
   }
 }

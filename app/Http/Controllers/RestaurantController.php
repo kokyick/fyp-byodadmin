@@ -116,6 +116,23 @@ class RestaurantController extends Controller
 	$DelDish =Api::postRequest("SoftDeleteMerchantProduct?id=" . $itemid, $myBody);
 	return redirect()->route('menus', ['id'=>$outId]);
   }
+  public function outofstockdish(Request $request)
+  {
+  
+	$status=$request->op_status;
+	$itemid=$request->op_id;
+	$outId=$request->outlet_idds;
+	$myBody['OP_ID'] = (int)$itemid;
+	if($status=="false"){
+		$myBody['stockstatus'] = true;
+	}else{
+		$myBody['stockstatus'] = false;
+	}
+	// dd($myBody);
+	//Soft delete dishes
+	$DelDish =Api::postRequest("outofstock", $myBody);
+	return redirect()->route('menus', ['id'=>$outId]);
+  }
   // delete outlet dishes
   public function outletdishdel(Request $request)
   {

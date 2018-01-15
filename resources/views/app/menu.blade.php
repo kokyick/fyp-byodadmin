@@ -169,8 +169,9 @@
 							<div class="card">
 								<div class="card-content">
                     				<a href="#" class="thumb"><figure class="img-polaroid"><img class="img-thumb" src="{{ $Menu['product_image'] }}" alt=""></figure></a><span class="description">{{ $Menu['name'] }}</span>
+                                    <span>{{ $Menu['price'] }} RM</span>
 									@for ($i = 0; $i <= round($Menu['avg_ratings']); $i++)
-										<span>☆</span>
+										<!-- <span>☆</span> -->
 									@endfor
 								</div>
 							</div>
@@ -453,6 +454,14 @@
 								<button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
 							</div>
 					</form>
+                    <form action="{{ route('outofstockdish')}}" method="POST">
+                        {{ csrf_field() }}
+                        <input style="display: none;" id="op_id" type="text" name="op_id" class="form-control">
+                        <input style="display: none;" id="op_status" type="text" name="op_status" class="form-control">
+                        <input style="display: none;" id="outlet_idds" type="text" name="outlet_idds" class="form-control">
+
+                        <button type="submit" id="status_sub" style="margin:5px;" class="btn btn-danger"><i class="fa fa-ban" aria-hidden="true"></i> Out of stock</button>
+                    </form>
 					<form action="{{ route('dodeleteoutdish')}}" method="POST">
 						{{ csrf_field() }}
 						<input style="display: none;" id="outlet_product_id" type="text" name="outlet_product_id" class="form-control input-number">
@@ -497,10 +506,21 @@ $('.myBtn').click(function(){
 		$("#modal_image").attr("src",data.product_image);
 		$('#itemid').attr('value', data.merchant_product_id);
 		
-		$('#outlet_product_id').attr('value', data.outlet_product_id);
+		$('#outlet_product_id').attr('value', data.outletproduct_id);
+        $('#op_id').attr('value', data.outletproduct_id);
 		$('#merchant_product_id').attr('value', data.merchant_product_id);
 		$('#outlet_idd').attr('value', outletiid);
-		
+        $('#outlet_idds').attr('value', outletiid);
+        $('#op_status').attr('value', data.outofstock);
+		if (data.outofstock==false){
+            $('#status_sub').css('background-color','#d9534f');
+            $('#status_sub').css('border-color','#d43f3a');
+            $('#status_sub').text("Out of stock");
+        }else{
+            $('#status_sub').css('background-color','#00E676');
+            $('#status_sub').css('border-color','#00C853');
+            $('#status_sub').text("In stock");
+        }
 		$('#itemname').attr('value', data.name);
 		$('#itemprice').attr('value', data.price);
 		$('#itemproduct_image').attr('value', data.product_image);
