@@ -3,38 +3,49 @@ namespace App\Library;
 
 use Illuminate\Http\Request;
 
+use Session;
 
 class Api
 {
 	const server = "http://byod-server20171008041155.azurewebsites.net/";
-
 	public static function postLogin($username, $password){
 		$client = new \GuzzleHttp\Client();
-		try {
-			$result=$client->request('POST', self::server . 'Token', [
-				'form_params' => [
-					'grant_type' => "password",
-					'username' => $username,
-					'password' => $password
-				]
-			]);
-		}catch (RequestException $e) {
-			$result= Psr7\str($e->getRequest());
-			if ($e->hasResponse()) {
-				$result= Psr7\str($e->getResponse());
-		}
-}
-		return $result;
+		$headers = [
+		    'Content-Type' => 'application/x-www-form-urlencoded'
+		];
+
+		$result=$client->request('POST', self::server . 'Token', [
+			'headers' => $headers,
+			'form_params' => [
+				'grant_type' => "password",
+				'username' => $username,
+				'password' => $password
+			]
+		]);
+		$response = $result->getBody()->getContents();
+		$resultauth=substr($response,17,491);
+		// $resultauth = json_decode( $result ,true);
+		// dd($response->access_token);
+		
+		return $resultauth;
 	}
 
 	public static function getRequest($link)
 	{
-
 		$client = new \GuzzleHttp\Client();
 
 		$url = self::server . "api/" . $link;
 		try {
-			$request = $client->request('GET', $url);
+			$headers = [];
+			if(Session::has('token')){
+				$headers = [
+				    'Authorization' => 'Bearer ' . Session::get('token'),        
+				    'Accept'        => 'application/json',
+				];
+			}
+			$request = $client->request('GET',$url, [
+		        'headers' => $headers
+		    ]);
 			$response = $request->getBody()->getContents();
 		}
 		catch (RequestException $e) {
@@ -54,7 +65,14 @@ class Api
 		$url = self::server . "api/" . $link;
 		//$myBody['name'] = "Demo";
 		try {
-		$request = $client->post($url,  ['form_params'=>$myBody]);
+			$headers = [];
+			if(Session::has('token')){
+				$headers = [
+				    'Authorization' => 'Bearer ' . Session::get('token'),        
+				    'Accept'        => 'application/json',
+				];
+			}
+		$request = $client->post($url,  ['headers' => $headers,'form_params'=>$myBody]);
 		$response = $request->getBody()->getContents();
 		}
 		catch (RequestException $e) {
@@ -74,7 +92,14 @@ class Api
 
 		//$myBody['name'] = "Demo";
 		try{
-		$request = $client->put($url,  ['form_params'=>$myBody]);
+			$headers = [];
+			if(Session::has('token')){
+				$headers = [
+				    'Authorization' => 'Bearer ' . Session::get('token'),        
+				    'Accept'        => 'application/json',
+				];
+			}
+		$request = $client->put($url,  ['headers' => $headers,'form_params'=>$myBody]);
 
 		$response = $request->getBody()->getContents();
 		}
@@ -94,7 +119,13 @@ class Api
 		
 		$url = self::server . "api/" . $link;
 		try{
-			$request = $client->delete($url);
+			if(Session::has('token')){
+				$headers = [
+				    'Authorization' => 'Bearer ' . Session::get('token'),        
+				    'Accept'        => 'application/json',
+				];
+			}
+			$request = $client->delete($url,['headers' => $headers]);
 
 			$response = $request->getBody()->getContents();
 		}

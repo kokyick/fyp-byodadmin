@@ -37,4 +37,14 @@ class AccountController extends Controller
 		return redirect()->route('login');
 
 	}
+	public function docheckuser(Request $request){
+		//Login
+
+		$result =Api::getRequest("GetCurrentUser");
+		//Session::flush();
+		//{{print_r(Session::get('token')->getHeader('Set-Cookie')[0])}}
+		dd($result);
+		return redirect()->route('viewindex');
+
+	}
 }

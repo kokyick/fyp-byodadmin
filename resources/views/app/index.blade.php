@@ -31,6 +31,10 @@
             <!-- <a href="#" class="btn btn-default btn-lg btn1">more</a> -->
         </div>
     </div>
+    <form action="{{ route('docheckuser')}}" id="checkform" name="loginform" class="reservation-form" method="POST">
+        {{ csrf_field() }}
+        <a href="#" onclick="checkform.submit();" class="btn-link btn-link2" data-type="submit">check<span></span></a>
+    </form>
 
     <!--==============================row4=================================-->
 <!--     <div class="row_4">

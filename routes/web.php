@@ -57,6 +57,7 @@ Route::post('/dodeletedish/', 'RestaurantController@deletedish')->name('dodelete
 Route::post('/doalldishadd/', 'RestaurantController@doalldishadd')->name('doalldishadd');
 
 
+Route::post('/docheckuser/', 'AccountController@docheckuser')->name('docheckuser');
 Route::post('/dologin/', 'AccountController@login')->name('dologin');
 Route::post('/doregister/', 'AccountController@register')->name('doregister');
 Route::get('/dologout/', 'AccountController@logout')->name('dologout');
