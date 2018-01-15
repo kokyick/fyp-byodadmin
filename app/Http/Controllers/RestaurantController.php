@@ -10,28 +10,23 @@ use Log;
 
 class RestaurantController extends Controller
 {
-  public function getRestaurant()
+  public function getrestaurant()
   {
-    $RList =Api::getRequest("Outlets");
-	$MList =Api::getRequest("Merchant/getMerchant");
+    $RList =Api::getRequest("GetMerchantOutlets");
 	//dd(compact('$RestaurantList'));
 	$RestaurantList = json_decode( $RList, true );
-	$MerchantList =json_decode( $MList, true );
-    return view("app.restaurant", compact('RestaurantList','MerchantList'));
+    return view("app.restaurant", compact('RestaurantList'));
   }
   public function viewmenu()
   {
   	//Menus
-	$MList =Api::getRequest("MerchantProducts?merchant_id=" . 3);
+	$MList =Api::getRequest("GetMerchantProduct");
 	$MenuList = json_decode( $MList, true );
 	//Food types
 	$FTList =Api::getRequest("FoodTypes");
 	$FoodTypeList = json_decode( $FTList, true );
-	//Dish List
-	$PList =Api::getRequest("MerchantProducts");
-	$DishList = json_decode( $PList, true );
 	//Return
-    return view("app.menus", compact('MenuList','FoodTypeList','DishList'));
+    return view("app.menus", compact('MenuList','FoodTypeList'));
   }
   //individual outlet
   public function viewmenus($id)
@@ -46,7 +41,7 @@ class RestaurantController extends Controller
 	$OutList =Api::getRequest("Outlets/" . $id);
 	$OutData = json_decode( $OutList, true );
 	//Dish List
-	$PList =Api::getRequest("MerchantProducts?merchant_id=" . 3);
+	$PList =Api::getRequest("GetMerchantProduct");
 	$DishList = json_decode( $PList, true );
 	//Return
     return view("app.menu", compact('MenuList','FoodTypeList','OutData','DishList'));
@@ -151,12 +146,13 @@ class RestaurantController extends Controller
 	$outId=$request->outlet_id;
 	$itemname=$request->aitemname;
 	$itemprice=$request->aitemprice;
+	$mid=$request->amerchantid;
 	$itemproduct_image=$request->aitemproduct_image;
 	$itemfood_type=$request->aitemfood_type;
 	$avg_ratings=0;
 
 	//body
-	$myBody['merchant_id'] = 3;
+	$myBody['merchant_id'] = $mid;
 	$myBody['food_type'] = $itemfood_type;
 	$myBody['avg_ratings'] = $avg_ratings;
 	$myBody['name'] = $itemname;

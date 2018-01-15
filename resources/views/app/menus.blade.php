@@ -393,13 +393,15 @@
 							<div class="input-group" style="width:100%;">
 
 								<h3>Name</h3>
-								<input id="aitemname" type="text" name="aitemname" class="form-control input-number">
+								<input id="aitemname" type="text" name="aitemname" class="form-control">
 								<hr/>
 								<h3>Price</h3>
-								$<input id="aitemprice" type="text" name="aitemprice" class="form-control input-number">
+								$<input id="aitemprice" type="text" name="aitemprice" class="form-control">
 								<hr/>
+
+                                <input style="display: none;" id="amerchantid" type="text" name="amerchantid" value="{{$MenuList[0]['merchant_id']}}" class="form-control">
 								<h3>Image</h3>
-								<input id="aitemproduct_image" type="text" name="aitemproduct_image" class="form-control input-number">
+								<input id="aitemproduct_image" type="text" name="aitemproduct_image" class="form-control">
 								<hr/>
 								<h3>Food Type</h3>
 								<select id="aitemfood_type" name="aitemfood_type"  class="form-control">

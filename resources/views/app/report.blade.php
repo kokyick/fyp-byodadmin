@@ -63,8 +63,10 @@
               </tr>
             </thead>
             <tbody>
+                <?php $sum=0.00; ?>
               @foreach ($OrderList as $food)
               <tr class="vieworders">
+                <?php $sum = $sum + (double)$food['order_bill']; ?>
                 <td>
                     {{ $food['order_id'] }}
                 </td>
@@ -93,6 +95,24 @@
                 </td>
               </tr>
               @endforeach
+               <tr class="vieworders">
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                    Total
+                </td>
+                <td>
+                    {{$sum}} RM
+                </td>
+              </tr>
           </tbody>
         </table>
         </div>

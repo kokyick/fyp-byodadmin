@@ -113,18 +113,9 @@
 			
             <div class="row">
         		<div class="col-lg-12 col-md-12 col-sm-12">
-                  <div id="options" class="clearfix">
-                      <ul id="filters" class="pagination option-set clearfix" data-option-key="filter">
-                        <li><a href="#filter" data-option-value="*" class="selected">All</a></li>
-						@foreach ($MerchantList as $Merchant)
-							<li><a href="#filter" data-option-value=".{{ $Merchant['merchant_id'] }}">{{ $Merchant['biz_name'] }}</a></li>
-						@endforeach
-                      </ul>
-                  </div><!-- #options -->
-                  <div class="containerExtra">
                   <div id="container" class="clearfix">
 					@foreach ($RestaurantList as $Restaurant)
-						<div class="element transition {{ $Restaurant['merchant_id'] }}" data-category="transition">
+						<div class="element transition {{ $Restaurant['merchant_id'] }}">
 							<div class="card">
 								<div class="card-content">
                     				<a href="{{ route('menus', $Restaurant['outlet_id']) }}" class="thumb"><figure class="img-polaroid"><img class="img-thumb" src="{{ $Restaurant['featured_photo'] }}" alt=""></figure></a>

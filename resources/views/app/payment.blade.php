@@ -37,7 +37,9 @@
               </tr>
             </thead>
             <tbody>
+              <?php $sum=0.00; ?>
               @foreach ($OrderList as $food)
+              <?php $sum = $sum + (double)$food['order_bill']; ?>
               <tr class="vieworders">
                 <td>
                     {{ $food['order_id'] }}
@@ -72,6 +74,24 @@
                 </td>
               </tr>
               @endforeach
+              <tr class="vieworders">
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                    Total
+                </td>
+                <td>
+                    {{$sum}} RM
+                </td>
+              </tr>
           </tbody>
         </table>
         </div>
@@ -187,7 +207,7 @@
                 <hr/> -->
                 <div class="modal-info">
                         <div class="card" style="width: 90%;">
-                           <div class="card-content">
+                           <div class="card-content" style="width: 100%;">
                               <figure><img src="{{ asset('img/smalllogo1.png') }}" alt=""></figure>
                               <hr/>
                               <ul id="list2" class="list2">
@@ -205,7 +225,7 @@
                     <form action="{{ route('cancelOrder')}}" method="POST">
                         {{ csrf_field() }}
                         <input style="display: none;" id="order1Id" type="text" name="order1Id" class="form-control">
-                        <button type="submit" style="margin:5px;" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Cancel Order</button>
+                        <button type="submit" style="margin:5px;" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Delete Order</button>
                     </form>
                     <hr/>
                     <h3>Add new food to order</h3>
