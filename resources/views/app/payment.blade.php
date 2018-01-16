@@ -13,7 +13,7 @@
     <div class="row_7">
         <div class="container">
             <div class="row">
-                <h2 class="pad_bot2">Revenue</h2>
+                <h2 class="pad_bot2">Revenue Stats</h2>
                 <canvas id="myChart"></canvas>
             </div>
         </div>
@@ -22,7 +22,7 @@
     <div class="row_7">
         <div class="container">
             <div class="row">
-                <h2 class="pad_bot2">Transactions History</h2>
+          <h2 class="pad_bot2">Transactions History</h2>
                 <div class="table-responsive">          
           <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-toggle="table" data-url="data1.json" class="table table-striped">
             <thead>
@@ -95,18 +95,27 @@
           </tbody>
         </table>
         </div>
+
+                <h2>Generate report</h2>
+                <form action="{{ route('htmltopdfview')}}" method="GET">
+                    <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; padding: 4px; border-radius: 4px; width: 40%">
+                        <i class="fa fa-calendar" aria-hidden="true"></i> &nbsp;
+                        <span id="datespan"></span> <b class="caret"></b>
+                    </div>
+                    <input style="display: none;" type="text" name="reportstart" id="reportstart">
+                    <input style="display: none;" type="text" name="reportend" id="reportend">
+                    <br/>
+                    <select id="outl_id" name="outl_id" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; padding: 4px; border-radius: 4px; width: 40%">
+                    @foreach ($RestaurantList as $outlet)
+                        <option value="{{$outlet['outlet_id']}}">{{ $outlet['name'] }}</option>
+                    @endforeach
+                    </select>
+                    <br/>
+                    <button type="submit" style="margin-left: 0; margin-top: 10px;" class="btn btn-primary"><i class="fa fa-book" aria-hidden="true"></i> Generte report</button>
+                </form>
+
     </div>
 
-    <h2>Generate report</h2>
-    <form action="{{ route('htmltopdfview')}}" method="GET">
-        <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; padding: 4px; border-radius: 4px; width: 40%">
-            <i class="fa fa-calendar" aria-hidden="true"></i> &nbsp;
-            <span id="datespan"></span> <b class="caret"></b>
-        </div>
-        <input style="display: none;" type="text" name="reportstart" id="reportstart">
-        <input style="display: none;" type="text" name="reportend" id="reportend">
-        <button type="submit" style="margin-left: 0; margin-top: 10px;" class="btn btn-primary"><i class="fa fa-trash" aria-hidden="true"></i> Generte report</button>
-    </form>
 </div>
 </div>
 

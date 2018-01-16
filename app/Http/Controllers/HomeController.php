@@ -47,10 +47,14 @@ class HomeController extends Controller
         $OrderList = json_decode( $OList, true );
         $OrderList=array_reverse($OrderList);
 
+        $RList =Api::getRequest("GetMerchantOutlets");
+        //dd(compact('$RestaurantList'));
+        $RestaurantList = json_decode( $RList, true );
+
         //Menus
         $MList =Api::getRequest("Products?outlet_id=" . 13);
         $DishList = json_decode( $MList, true );
-        return view("app.payment", compact('OrderList','DishList'));
+        return view("app.payment", compact('OrderList','DishList','RestaurantList'));
     }
 	public function viewfeedback()
     {

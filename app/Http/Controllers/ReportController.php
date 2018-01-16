@@ -15,11 +15,12 @@ class ReportController extends Controller
     {
         $start=$request->reportstart;
         $end=$request->reportend;
+        $outl_id=(int)$request->outl_id;
 
         $myBody['startdate'] = $request->reportstart;
         $myBody['enddate'] = $request->reportend;
-        // dd($myBody);
-        $result =Api::postRequest("PostOutletReport?outletID=" . 13,$myBody);
+        //dd($outl_id);
+        $result =Api::postRequest("PostOutletReport?outletID=" . $outl_id,$myBody);
         // dd($result);
         $OrderList = json_decode( $result, true );
 
