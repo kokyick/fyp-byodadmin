@@ -22,7 +22,7 @@
     <div class="row_7">
         <div class="container">
             <div class="row">
-          <h2 class="pad_bot2">Transactions History</h2>
+          <!-- <h2 class="pad_bot2">Transactions History</h2>
                 <div class="table-responsive">          
           <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-toggle="table" data-url="data1.json" class="table table-striped">
             <thead>
@@ -94,7 +94,7 @@
               </tr>
           </tbody>
         </table>
-        </div>
+        </div> -->
 
                 <h2>Generate report</h2>
                 <form action="{{ route('htmltopdfview')}}" method="GET">
