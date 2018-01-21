@@ -35,6 +35,7 @@ class Api
 	{
 		$client = new \GuzzleHttp\Client();
 
+		// dd(Session::get('token'));
 		$url = self::server . "api/" . $link;
 		try {
 			$headers = [];
