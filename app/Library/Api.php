@@ -23,9 +23,10 @@ class Api
 			]
 		]);
 		$response = $result->getBody()->getContents();
-		$resultauth=substr($response,17,491);
+		$resultauth=substr($response,17,512);
+
 		// $resultauth = json_decode( $result ,true);
-		// dd($response->access_token);
+		//dd($resultauth);
 		
 		return $resultauth;
 	}
