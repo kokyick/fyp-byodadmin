@@ -50,7 +50,7 @@ class RestaurantController extends Controller
   public function viewfooditem($id)
   {
 	//Single Menus
-	$Food =Api::getRequest("GetSingleProduct?product_id=" . $id);
+	$Food =Api::getRequest("GetSingleMProduct?product_id=" . $id);
 	$FoodItem = json_decode( $Food, true );
 	//dd($FoodItem);
 	//Return
