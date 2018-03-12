@@ -22,11 +22,13 @@ class RestaurantController extends Controller
   	//Menus
 	$MList =Api::getRequest("GetMerchantProduct");
 	$MenuList = json_decode( $MList, true );
+
+	$Merchant_id=$MenuList[0]['merchant_id'];
 	//Food types
 	$FTList =Api::getRequest("FoodTypes");
 	$FoodTypeList = json_decode( $FTList, true );
 	//Return
-    return view("app.menus", compact('MenuList','FoodTypeList'));
+    return view("app.menus", compact('MenuList','FoodTypeList','Merchant_id'));
   }
   //individual outlet
   public function viewmenus($id)
@@ -208,5 +210,40 @@ class RestaurantController extends Controller
   {
   		$dishes=$request->dishes;
   		dd($dishes);
+  }
+  public function csvToArray($filename = '', $delimiter = ',')
+  {
+	    if (!file_exists($filename) || !is_readable($filename))
+	        return false;
+
+	    $header = null;
+	    $data = array();
+	    if (($handle = fopen($filename, 'r')) !== false)
+	    {
+	        while (($row = fgetcsv($handle, 1000, $delimiter)) !== false)
+	        {
+	            if (!$header)
+	                $header = $row;
+	            else
+	                $data[] = array_combine($header, $row);
+	        }
+	        fclose($handle);
+	    }
+
+	    return $data;
+  }
+  public function importCsv()
+  {
+    $file = public_path('file/test.csv');
+
+    $customerArr = $this->csvToArray($file);
+    dd($customerArr);
+
+    for ($i = 0; $i < count($customerArr); $i ++)
+    {
+        User::firstOrCreate($customerArr[$i]);
+    }
+
+    return 'Jobi done or what ever';    
   }
 }

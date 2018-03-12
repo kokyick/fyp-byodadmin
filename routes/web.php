@@ -63,3 +63,7 @@ Route::post('/doregister/', 'AccountController@register')->name('doregister');
 Route::get('/dologout/', 'AccountController@logout')->name('dologout');
 
 Route::get('/htmltopdfview/', 'ReportController@htmltopdfview')->name('htmltopdfview');
+
+Route::get('importExport', 'ExcelController@importExport');
+Route::get('downloadExcel/{type}', 'ExcelController@downloadExcel');
+Route::post('importExcel', 'ExcelController@importExcel')->name('importExcel');

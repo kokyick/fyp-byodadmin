@@ -114,6 +114,13 @@
             <div class="row">
         		<div class="col-lg-12 col-md-12 col-sm-12">
                   <div id="options" class="clearfix">
+                    <form style="border: 4px solid #a1a1a1;margin-top: 15px;padding: 10px;" action="{{ route('importExcel') }}" class="form-horizontal" method="post" enctype="multipart/form-data">
+                        <h3><b>Bulk Import Menu</b></h3>
+                        <input style="display: none;" id="mid" type="text" name="mid" value="{{$Merchant_id}}" class="form-control">
+                        <input style="margin-bottom: 10px;" type="file" name="import_file" />
+                        {{ csrf_field() }}
+                        <button class="btn btn-primary">Import CSV File</button>
+                    </form>
                       <ul id="filters" class="pagination option-set clearfix" data-option-key="filter">
                         <li><a href="#filter" data-option-value="*" class="selected">All</a></li>
 						@foreach ($FoodTypeList as $FoodType)
