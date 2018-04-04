@@ -128,6 +128,7 @@
 						@endforeach
                       </ul>
                   </div><!-- #options -->
+                    <!-- <input type="text" class="searchbox-input form-control" name="searchbox-input" id="searchbox-input"> -->
                   <div class="containerExtra">
                   <div id="container" class="clearfix">
 					<div class="element transition amyBtn" data-category="transition">
@@ -141,10 +142,12 @@
 							</div>
 						</div>
 					</div>
+
 					@foreach ($MenuList as $Menu)
 						<div class="element transition {{ $Menu['food_type'] }} myBtn"  id="{{ route('singlemenus', $Menu['merchant_product_id']) }}" data-category="transition">
 							<div class="card">
 								<div class="card-content">
+                                    
                     				<a href="#" class="thumb"><figure class="img-polaroid"><img class="img-thumb" src="{{ $Menu['product_image'] }}" alt=""></figure></a>
 									<span class="description">{{ $Menu['name'] }}</span>
 									@for ($i = 0; $i <= round($Menu['avg_ratings']); $i++)
@@ -162,6 +165,14 @@
         </div>
     </div>
 </div>
+
+<script>
+$('.searchbox-input').change( function () {
+    $('.card').show();
+    var filter = $(this).val(); // get the value of the input, which we filter on
+    $('.container').find(".card-content:not(:contains(" + filter + "))").parent().parent().css('display','none');
+});
+</script>
 
 
 <style>

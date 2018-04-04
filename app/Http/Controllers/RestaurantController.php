@@ -74,6 +74,7 @@ class RestaurantController extends Controller
 	$itemprice=$request->itemprice;
 	$itemproduct_image=$request->itemproduct_image;
 	$avg_ratings=$request->avg_ratings;
+	$itemresid=$request->itemresid;
 
 	//get foreign keys
 	$Food =Api::getRequest("MerchantProducts/" . $itemid);
@@ -86,6 +87,7 @@ class RestaurantController extends Controller
 	$myBody['name'] = $itemname;
 	$myBody['price'] = $itemprice;
 	$myBody['product_image'] = $itemproduct_image;
+	$myBody['restaurant_food_id'] = $itemresid;
 	$result =Api::putRequest("MerchantProducts/" . $itemid,$myBody);
 
     return redirect()->route('menus', ['id'=>$outId]);

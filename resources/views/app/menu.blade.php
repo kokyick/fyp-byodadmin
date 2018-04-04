@@ -169,7 +169,8 @@ src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJp2kn7Sb4zDERVPL0O
 						<div class="element transition {{ $Menu['food_type_id'] }} myBtn" name="{{ $OutData['outlet_id'] }}" id="{{ route('singlemenus', $Menu['merchant_product_id']) }}" data-category="transition">
 							<div class="card">
 								<div class="card-content">
-                    				<a href="#" class="thumb"><figure class="img-polaroid"><img class="img-thumb" src="{{ $Menu['product_image'] }}" alt=""></figure></a><span class="description">{{ $Menu['name'] }}</span>
+                    				<a href="#" class="thumb"><figure class="img-polaroid"><img class="img-thumb" src="{{ $Menu['product_image'] }}" alt=""></figure></a>
+                                    <span class="description">({{$Menu['restaurant_food_id']}}) {{ $Menu['name'] }}</span>
                                     <span>{{ $Menu['price'] }} RM</span>
 									@for ($i = 0; $i <= round($Menu['avg_ratings']); $i++)
 										<!-- <span>☆</span> -->
@@ -439,7 +440,8 @@ src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJp2kn7Sb4zDERVPL0O
 							<div class="input-group" style="width:100%;">
 								<input style="display: none;" id="outletid" type="text" name="outletid" class="form-control input-number" value="{{$OutData['outlet_id']}}">
 								<input style="display: none;" id="itemid" type="text" name="itemid" class="form-control input-number">
-
+                                <h3>Restaurant ID</h3>
+                                <input id="itemresid" type="text" name="itemresid" class="form-control input-number">
 								<h3>Name</h3>
 								<input id="itemname" type="text" name="itemname" class="form-control input-number">
 								<hr/>
@@ -523,6 +525,8 @@ $('.myBtn').click(function(){
             $('#status_sub').text("In stock");
         }
 		$('#itemname').attr('value', data.name);
+        $('#itemresid').attr('value', data.restaurant_food_id);
+
 		$('#itemprice').attr('value', data.price);
 		$('#itemproduct_image').attr('value', data.product_image);
 		$('#itemmerchant_id').attr('value', data.merchant_id);
